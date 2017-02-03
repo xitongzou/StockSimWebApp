@@ -1,0 +1,29 @@
+{
+  "name": "stock-sim",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-plugin-react": "^6.9.0",
+    "gulp": "^3.9.1",
+    "react-scripts": "0.8.5"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "express": "^4.14.1",
+    "fetch-jsonp": "^1.0.5",
+    "highcharts": "^5.0.7",
+    "material-ui": "^0.16.7",
+    "morgan": "^1.7.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2",
+    "react-tap-event-plugin": "^2.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
