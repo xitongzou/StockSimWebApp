@@ -11,4 +11,6 @@ it does not calculate stock indices.
 Run `npm run build` from the root to build the app and run `node server` to get the server up and running.
 By default it starts up on `http://localhost:9000/`.
 
+If you would like to debug the app, run `npm start` instead. 
+
 -Tong Zou
