@@ -23,6 +23,7 @@ export default class Main extends Component {
             stopLimit: 0.75,
             sellLimit: 1.05,
             fees: 9.95,
+            spinnerVisible: false,
             analysisText: [],
             // TODO: I want this to be a HashMap in the future if I can get it working
             simulationPoints: []
@@ -34,6 +35,7 @@ export default class Main extends Component {
         this.resetSimulationPoints = this.resetSimulationPoints.bind(this);
         this.renderChart = this.renderChart.bind(this);
         this.renderSimulation = this.renderSimulation.bind(this);
+        this.showHideSpinner = this.showHideSpinner.bind(this);
         this.simulate = this.simulate.bind(this);
         this.fetch = this.fetch.bind(this, dowList, nasdaqList, spList);
     }
@@ -45,6 +47,12 @@ export default class Main extends Component {
 
         this.setState({
             [name]: value
+        });
+    }
+
+    showHideSpinner(spinnerVisible) {
+        this.setState({
+            spinnerVisible: spinnerVisible
         });
     }
 
@@ -228,6 +236,8 @@ export default class Main extends Component {
 
     fetch(dowList, nasdaqList, spList) {
         const simulate = this.simulate;
+        const showHideSpinner = this.showHideSpinner;
+        showHideSpinner(true);
 
         const url = 'http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/jsonp?parameters=%7B%22Normalized%22%3Afalse%2C%22StartDate%22%3A%22' +
             this.state.startDate + 'T00%3A00%3A00-00%22%2C%22EndDate%22%3A%22' +
@@ -239,6 +249,7 @@ export default class Main extends Component {
             .then((json) => {
                 console.log('parsed json', json);
                 simulate(json, dowList, nasdaqList, spList);
+                showHideSpinner(false);
             }).catch((ex) => {
                 console.error('parsing failed', ex)
             });
@@ -259,6 +270,7 @@ export default class Main extends Component {
         const renderChart = this.renderChart;
         const addSimulationPoint = this.addSimulationPoint;
         const simulationPoints = this.state.simulationPoints;
+        const showHideSpinner = this.showHideSpinner;
         const sellLimit = this.state.sellLimit;
         const stopLimit = this.state.stopLimit;
         const fees = this.state.fees;
@@ -734,6 +746,7 @@ export default class Main extends Component {
 
         const analysisText = this.state.analysisText;
         const simulationPoints = this.state.simulationPoints;
+        const spinnerVisible = this.state.spinnerVisible;
 
         const renderSimulation = () => {
             const simulationDates = [];
@@ -774,15 +787,18 @@ export default class Main extends Component {
                         <RaisedButton label="Simulate" onClick={this.fetch} />
                     </div>
                 </form>
-                <div id="chartContainer"></div>
+                <div id="chartContainer">
+                    {spinnerVisible ? <img className="spinner" role="presentation" src="/spinner.gif"/> : null}
+                </div>
                 <div id="simulationContainer">
+                    {spinnerVisible ? <img className="spinner" role="presentation" src="/spinner.gif"/> : null}
                     {simulationPoints.length > 0 ? renderSimulation() : null}
                 </div>
                 <div id="analysis">
                     {analysisText}
                 </div>
-                <h2>Full Log:</h2>
                 <div id="simulationPoints">
+                    <h2 className="logTitle">Full Log:</h2>
                     {simulationPoints.map((simulationPoint) => {
                         return <h3>{simulationPoint.date}: {simulationPoint.action} {simulationPoint.numShares} Shares at {simulationPoint.price}</h3>;
                     })}
