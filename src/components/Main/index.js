@@ -755,15 +755,19 @@ export default class Main extends Component {
                         <TextField name="startDate" hintText="2000-01-01" onChange={this.handleInputChange} />
                         <label>End Date: </label>
                         <TextField name="endDate" hintText="2017-01-01" onChange={this.handleInputChange} />
-                        <label>Buying Power: </label>
+                        <label>Cash on hand: </label>
                         <TextField name="buyingPower" hintText="10000" onChange={this.handleInputChange} />
                     </div>
                     <div>
-                        <label>Stop Limit (default values recommended): </label>
+                        <label>Stop Limit (e.g. 0.75 means sell / take losses when stock is @ 25% below bought price): </label>
                         <TextField name="stopLimit" defaultValue="0.75" onChange={this.handleInputChange} />
-                        <label>Sell Limit (default values recommended): </label>
+                    </div>
+                    <div>
+                        <label>Sell Limit (e.g. 1.05 means sell / take profit when stock is @ 5% above bought price): </label>
                         <TextField name="sellLimit" defaultValue="1.05" onChange={this.handleInputChange} />
-                        <label>Commission fees: </label>
+                    </div>
+                    <div>
+                        <label>Commission fees (set it to whatever your brokerage charges): </label>
                         <TextField name="fees" defaultValue="9.95" onChange={this.handleInputChange} />
                     </div>
                     <div>
