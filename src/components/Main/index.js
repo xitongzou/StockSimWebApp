@@ -239,7 +239,13 @@ export default class Main extends Component {
 
     simulate(data, dowList, nasdaqList, spList) {
 
-        const dates = data.Dates || [];
+        const dates = [];
+        const dateFormat = (date) => date.split('T')[0];
+
+        for (let i = 0; i < data.Dates.length; i++) {
+            dates.push(dateFormat(data.Dates[i]));
+        }
+        
         const prices = data.Elements ? data.Elements[0].DataSeries.close.values : [];
         const stock = this.state.stock;
         const addToAnalysis = this.addToAnalysis;
@@ -254,7 +260,6 @@ export default class Main extends Component {
         const dowJonesPer = [];
         const nasdaqPer = [];
         const spPer = [];
-        const dateFormat = (date) => date.split('T')[0];
 
         addToAnalysis(<h3>Calculating Indices...</h3>);
 
