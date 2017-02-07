@@ -31,6 +31,7 @@ export default class Main extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.addToAnalysis = this.addToAnalysis.bind(this);
         this.addSimulationPoint = this.addSimulationPoint.bind(this);
+        this.resetSimulationPoints = this.resetSimulationPoints.bind(this);
         this.renderChart = this.renderChart.bind(this);
         this.renderSimulation = this.renderSimulation.bind(this);
         this.simulate = this.simulate.bind(this);
@@ -57,6 +58,12 @@ export default class Main extends Component {
         this.setState({
             simulationPoints: this.state.simulationPoints.concat({name, date, action, numShares, price})
         });
+    }
+
+    resetSimulationPoints() {
+        this.setState({
+            simulationPoints: []
+        })
     }
 
     renderChart(stock, dates, prices) {
@@ -245,7 +252,7 @@ export default class Main extends Component {
         for (let i = 0; i < data.Dates.length; i++) {
             dates.push(dateFormat(data.Dates[i]));
         }
-        
+
         const prices = data.Elements ? data.Elements[0].DataSeries.close.values : [];
         const stock = this.state.stock;
         const addToAnalysis = this.addToAnalysis;
@@ -260,6 +267,9 @@ export default class Main extends Component {
         const dowJonesPer = [];
         const nasdaqPer = [];
         const spPer = [];
+
+        // reset state
+        this.resetSimulationPoints();
 
         addToAnalysis(<h3>Calculating Indices...</h3>);
 
