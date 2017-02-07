@@ -23,6 +23,8 @@ means thats its highly dependent on the data sets having the same length. In the
 
 ## Instructions for running
 
+First run `npm install` to install all the node nodules.
+
 Run `npm run build` from the root to build the app and run `node server` to get the server up and running.
 By default it starts up on `http://localhost:9000/`.
 
