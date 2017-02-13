@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import fetchJsonp from 'fetch-jsonp';
 import highcharts from 'highcharts';
-import RaisedButton from 'material-ui/FlatButton';
+import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import dowList from '../../data/djia.json';
 import nasdaqList from '../../data/ixic.json';
@@ -784,7 +784,7 @@ export default class Main extends Component {
                         <TextField name="fees" defaultValue="9.95" onChange={this.handleInputChange} />
                     </div>
                     <div>
-                        <RaisedButton label="Simulate" onClick={this.fetch} />
+                        <FlatButton label="Simulate" onClick={this.fetch} />
                     </div>
                 </form>
                 <div id="chartContainer">
