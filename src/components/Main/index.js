@@ -213,7 +213,7 @@ export default class Main extends Component {
                                         x: e.pageX || e.clientX,
                                         y: e.pageY || e.clientY
                                     },
-                                    headingText: this.category.split('T')[0],
+                                    headingText: this.category,
                                     maincontentText: simulationPoints[this.index].action + ' ' +
                                     simulationPoints[this.index].numShares + ' shares at $' + this.y,
                                     width: 200
